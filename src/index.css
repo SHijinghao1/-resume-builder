@@ -1,0 +1,478 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Merriweather", "Georgia", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply antialiased text-slate-800 bg-slate-50/50 selection:bg-blue-100 selection:text-blue-900;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  /* Glass effect */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-slate-200/60 shadow-sm;
+  }
+  
+  .glass-input {
+    @apply bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 focus:bg-white focus:ring-4 focus:ring-slate-100 outline-none transition-all;
+  }
+
+  /* Base Prose Styles applied to all themes */
+  .prose-modern, .prose-classic, .prose-minimal, .prose-pdf, .prose-ai-custom {
+    @apply text-sm leading-relaxed;
+    font-family: inherit;
+    color: inherit;
+  }
+  
+  .prose-modern *, .prose-classic *, .prose-minimal *, .prose-pdf *, .prose-ai-custom * {
+    font-family: inherit;
+  }
+  
+  .prose-modern h1, .prose-classic h1, .prose-minimal h1 {
+    @apply text-4xl font-extrabold mb-4 mt-0 pr-[110px];
+    position: relative;
+  }
+  
+  .prose-modern h2, .prose-classic h2, .prose-minimal h2 {
+    @apply text-xl font-bold mt-8 mb-4 pb-2 border-b pr-[110px];
+    position: relative;
+  }
+
+  .prose-wrapper table {
+    @apply w-full border-collapse mb-4;
+  }
+
+  .layout-standard .prose-wrapper table {
+    max-width: calc(100% - 130px);
+  }
+
+  .layout-sidebar .prose-wrapper table, 
+  .layout-centered .prose-wrapper table {
+    max-width: 100%;
+  }
+  
+  .prose-modern h3, .prose-classic h3, .prose-minimal h3 {
+    @apply text-lg font-bold mt-5 mb-2.5;
+  }
+  
+  .prose-modern p, .prose-classic p, .prose-minimal p {
+    @apply mb-3;
+  }
+  
+  .prose-modern ul, .prose-classic ul, .prose-minimal ul {
+    @apply list-disc pl-5 mb-3;
+  }
+  
+  .prose-modern ol, .prose-classic ol, .prose-minimal ol {
+    @apply list-decimal pl-5 mb-3;
+  }
+  
+  .prose-modern li, .prose-classic li, .prose-minimal li {
+    @apply mb-1;
+  }
+  
+  .prose-modern a, .prose-classic a, .prose-minimal a {
+    @apply text-blue-600 hover:underline;
+  }
+  
+  .prose-modern strong, .prose-classic strong, .prose-minimal strong {
+    @apply font-semibold;
+  }
+  
+  .prose-modern em, .prose-classic em, .prose-minimal em {
+    @apply italic;
+  }
+  
+  .prose-modern hr, .prose-classic hr, .prose-minimal hr {
+    @apply my-6 border-gray-300;
+  }
+
+  /* Theme: Modern */
+  .prose-modern {
+    @apply font-sans text-gray-800;
+  }
+  .prose-modern h1 {
+    @apply text-blue-900 tracking-tight;
+  }
+  .prose-modern h2 {
+    @apply text-blue-800 border-blue-200 uppercase tracking-wider text-sm font-bold;
+  }
+  .prose-modern h3 {
+    @apply text-gray-900;
+  }
+  .prose-modern a {
+    @apply text-blue-600 no-underline hover:underline;
+  }
+
+  /* Theme: Classic */
+  .prose-classic {
+    @apply font-serif text-gray-900;
+  }
+  .prose-classic h1 {
+    @apply text-center text-4xl mb-1;
+  }
+  .prose-classic p:first-of-type {
+    /* Target the contact info usually right after h1 */
+    @apply text-center text-gray-600 mb-6;
+  }
+  .prose-classic h2 {
+    @apply border-gray-400 text-center uppercase tracking-widest text-base mt-8;
+  }
+  .prose-classic h3 {
+    @apply font-bold text-gray-900;
+  }
+  .prose-classic a {
+    @apply text-gray-800 underline decoration-gray-300 hover:decoration-gray-800;
+  }
+
+  /* Theme: Minimal */
+  .prose-minimal {
+    @apply font-sans text-gray-700;
+  }
+  .prose-minimal h1 {
+    @apply text-2xl font-medium tracking-tight text-black mb-4;
+  }
+  .prose-minimal h2 {
+    @apply border-none text-black font-medium mt-8 mb-4;
+  }
+  .prose-minimal h3 {
+    @apply font-medium text-black;
+  }
+  .prose-minimal hr {
+    @apply border-dashed border-gray-300 my-8;
+  }
+  .prose-minimal a {
+    @apply text-black underline decoration-1 underline-offset-2 hover:bg-black hover:text-white transition-colors;
+  }
+  /* Theme: PDF */
+  .print-container.prose-pdf {
+    padding-top: 48px !important;
+    position: relative;
+  }
+  .print-container.prose-pdf::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 16px;
+    background-color: #5b809a;
+  }
+  .print-container.prose-pdf::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #c6a57a;
+  }
+  .prose-pdf {
+    @apply font-sans text-gray-800;
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .prose-pdf p {
+    margin-bottom: 6px;
+    text-align: justify;
+    color: #374151;
+  }
+  .prose-pdf ul {
+    list-style-type: square;
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+  .prose-pdf li {
+    margin-bottom: 4px;
+    padding-left: 2px;
+    color: #374151;
+  }
+  .prose-pdf li::marker {
+    color: #5b809a;
+  }
+  .prose-pdf strong {
+    color: #111827;
+    font-weight: 700;
+  }
+  .prose-pdf h1 {
+    color: #5b809a;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-top: 0;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: baseline;
+  }
+  .prose-pdf h1 em {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #5b809a;
+    border-left: 1px solid #5b809a;
+    padding-left: 12px;
+    margin-left: 12px;
+  }
+  .prose-pdf h2 {
+    position: relative;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px 12px;
+    display: inline-block;
+    z-index: 1;
+  }
+  .prose-pdf h2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #5b809a;
+    border-radius: 4px;
+    z-index: -1;
+  }
+  .prose-pdf h2::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 1000px;
+    height: 1px;
+    background-color: #5b809a;
+    z-index: -2;
+  }
+  .prose-pdf table {
+    width: 100%;
+    margin-bottom: 12px;
+    border-collapse: collapse;
+  }
+  .prose-pdf th, .prose-pdf td {
+    padding: 4px 0;
+    text-align: left;
+    border: none;
+    vertical-align: top;
+  }
+  .prose-pdf thead {
+    display: none;
+  }
+
+  /* Theme: AI Custom */
+  .prose-ai-custom {
+    --primary: var(--cv-primary, #5b809a);
+    --secondary: var(--cv-secondary, #c6a57a);
+    --heading: var(--cv-heading, #5b809a);
+    --text: var(--cv-text, #374151);
+    --bg-paper: var(--cv-bg, #ffffff);
+    --font-family: var(--cv-font, ui-sans-serif);
+    
+    font-family: var(--font-family) !important;
+    color: var(--text);
+    background-color: var(--bg-paper);
+    font-size: var(--cv-font-size, 13px);
+    line-height: var(--cv-line-height, 1.6);
+  }
+
+  /* Resume Avatar & Image Optimization */
+  .prose-wrapper img {
+    @apply max-w-full h-auto;
+  }
+
+  .resume-avatar {
+    @apply w-[90px] h-[120px] object-cover rounded-sm border border-slate-200 shadow-md ml-6 mb-4 block;
+    transition: all 0.3s ease;
+  }
+
+  .layout-standard .resume-avatar {
+    float: right;
+  }
+
+  .layout-sidebar .resume-avatar {
+    @apply mx-auto mb-8 float-none w-[110px] h-[145px] shadow-lg border-white border-[3px];
+  }
+
+  .layout-centered .resume-avatar {
+    @apply mx-auto mb-6 float-none text-center;
+  }
+
+  /* Clearfix */
+  .prose-wrapper::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .prose-ai-custom p, .prose-ai-custom li, .prose-ai-custom td {
+    color: var(--text);
+    font-family: var(--font-family) !important;
+  }
+
+  /* Layout Variations */
+  .layout-centered .prose-wrapper {
+    @apply text-center;
+  }
+  .layout-centered p {
+    @apply mx-auto max-w-2xl;
+  }
+  .layout-centered h1, .layout-centered h2, .layout-centered h3 {
+    @apply text-center mx-auto justify-center;
+  }
+  .layout-centered table {
+    @apply mx-auto;
+  }
+  .layout-centered h2::after {
+    @apply left-1/2 -translate-x-1/2 w-16;
+  }
+
+  .layout-sidebar .prose-wrapper {
+    @apply grid gap-10;
+    grid-template-columns: 240px 1fr;
+  }
+
+  @media (max-width: 640px) {
+    .layout-sidebar .prose-wrapper {
+      @apply grid-cols-1;
+    }
+  }
+
+  .prose-ai-custom h1 {
+    color: var(--primary);
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 0.5rem;
+  }
+
+  .prose-ai-custom h2 {
+    color: var(--heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    border-left: 4px solid var(--primary);
+    padding-left: 0.75rem;
+    background-color: color-mix(in srgb, var(--primary) 5%, transparent);
+  }
+
+  .prose-ai-custom h3 {
+    color: var(--text);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  .prose-ai-custom p {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-ai-custom ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose-ai-custom li {
+    margin-bottom: 0.25rem;
+  }
+
+  .prose-ai-custom strong {
+    color: #000;
+  }
+
+  .prose-ai-custom table {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .prose-ai-custom td {
+    padding: 0.25rem 0;
+  }
+
+  .print-container {
+    @apply transition-all duration-300;
+    padding: 20mm;
+    box-sizing: border-box;
+  }
+}
+
+/* Print Styles */
+@media print {
+  @page {
+    margin: 0;
+    size: A4;
+  }
+  
+  body {
+    background: white !important;
+  }
+  
+  /* Hide UI elements */
+  header, 
+  nav, 
+  .sm\:hidden,
+  input, 
+  button, 
+  select,
+  .fixed,
+  textarea {
+    display: none !important;
+  }
+  
+  /* Adjust main layout for printing */
+  #root > div {
+    height: auto !important;
+    display: block !important;
+    background: white !important;
+  }
+  
+  main {
+    display: block !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+  
+  /* Hide the editor pane */
+  main > div:first-child {
+    display: none !important;
+  }
+  
+  /* Show only the preview pane's content */
+  main > div:last-child {
+    display: block !important;
+    overflow: visible !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    background: white !important;
+    padding: 0 !important;
+  }
+
+  main > div:last-child > div:first-child {
+    display: none !important; /* Hide "Real-time preview" header */
+  }
+  
+  .print-container {
+    box-shadow: none !important;
+    max-width: none !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    padding: 15mm 20mm !important;
+    background: white !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+}

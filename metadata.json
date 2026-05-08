@@ -1,0 +1,5 @@
+{
+  "name": "Nexus Resume AI",
+  "description": "Professional AI-powered resume builder. Real-time Markdown editing, intelligent content polishing, and multi-provider AI support (Gemini, OpenAI, Deepseek).",
+  "requestFramePermissions": []
+}
